@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>ECharts</title>
+  <!-- 引入 echarts.js -->
+  <script src="http://echarts.baidu.com/dist/echarts.js"></script>
+</head>
+<body>
+
+    <!-- 1.为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 800px;height:550px;"></div>
+
+
+	<!-- 2.加载echart,导入可视化数据 -->
+    <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+    title : {//图片标题
+        text: 'SNP Distribution In Genome',
+        x:'center'
+    },
+    tooltip : {//提示文本
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {//图例设置
+        orient : 'vertical',
+        x : 'left',
+        data:['UTR3','UTR5','downstream','exonic','intergenic','intronic','ncRNA','splicing','upstream','other'],
+        textStyle:{
+           fontSize: 20
+		}
+	},
+    toolbox: {//工具箱设置
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 2000
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [//实际数据
+        {
+            name:'sample1',
+            type:'pie',
+            radius : '75%',
+            center: ['50%', '60%'],
+            data:[
+                {value:318, name:'UTR3'},
+                {value:229, name:'UTR5'},
+                {value:41, name:'downstream'},
+                {value:2818, name:'exonic'},
+                {value:317, name:'intergenic'},
+				{value:5782, name:'intronic'},
+                {value:389, name:'ncRNA'},
+                {value:9, name:'splicing'},
+                {value:98, name:'upstream'},
+                {value:0, name:'other'}
+            ],
+			
+			itemStyle:{
+				normal:{
+					label:{
+						textStyle:{
+							fontSize:20
+						}
+					}
+				}
+			}
+        }
+    ]
+};
+                    
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
+
+
+
+
